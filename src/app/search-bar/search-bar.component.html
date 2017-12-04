@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="row">
+    <label for="typeahead-http">Search for a domains:</label>
+  </div>
+  <div class="row">
+    <div class="col-md-4 input-group">
+      <input id="typeahead-http"
+             type="text"
+             class="form-control"
+             [class.is-invalid]="searchFailed"
+             [(ngModel)]="model"
+             [ngbTypeahead]="search"
+             placeholder="Zenefits Domain search"
+             (selectItem)="selectedItem($event)"/>
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="partialMatches()">Go!</button>
+      </span>
+      <span *ngIf="searching">searching...</span>
+      <div class="alert-danger" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+    </div>
+  </div>
+  <div class="row">
+    <h3>Domains available: </h3>
+    <hr>
+    <div class="row">
+      <a class="col-md-4" [href]="'http://' + value" target="_blank" *ngFor="let value of result">{{value}}</a>
+    </div>
+  </div>
+
+</div>
